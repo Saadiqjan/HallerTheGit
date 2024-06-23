@@ -29,18 +29,31 @@ namespace HallerTheGame
         private Texture2D[] tileImgs;
         private Tile[,] tiles;
 
+        //Store time passed in level
+        private Timer levelTimer;
+
         public Level(Rectangle levelBounds, string mapFile, Song bgm)
         {
             LoadMap(mapFile);
+
+            //Setup level timer
+            levelTimer = new Timer(Timer.INFINITE_TIMER, true);
         }
 
         public void Update(GameTime gameTime)
         {
-
+            //Update level timer
+            levelTimer.Update(gameTime.ElapsedGameTime.TotalMilliseconds);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
+
+
+
+            spriteBatch.End();
+
             //Draw tiles
             for (int i = 0; i < tiles.GetLongLength(0); i++)
             {
