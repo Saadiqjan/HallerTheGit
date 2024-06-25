@@ -2,7 +2,7 @@
 //File Name: Level.cs
 //Project Name: HallerTheGame
 //Creation Date: Apr. 19 2024
-//Modified Date: Apr. 20 2024
+//Modified Date: Jun. 22 2024
 //Description: level
 using GameUtility;
 using Microsoft.Xna.Framework;
@@ -50,7 +50,7 @@ namespace HallerTheGame
         {
             spriteBatch.Begin();
 
-
+            
 
             spriteBatch.End();
 
