@@ -298,6 +298,7 @@ namespace HallerTheGame
                         {
                             gameState = CAMP;
                         }
+                        else
                         {
                             gameState = TUTORIAL;
                         }
