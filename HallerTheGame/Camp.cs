@@ -40,6 +40,9 @@ namespace HallerTheGame
             string[] data;
             string line;
 
+            //Store does collide
+            bool doesCollide = false;
+
             line = inFile.ReadLine();
             data = line.Split(',');
 
@@ -62,7 +65,19 @@ namespace HallerTheGame
                     //Add new tile for every coloumn in row
                     for (int j = 0; j < tiles.GetLongLength(1); j++)
                     {
-                        tiles[i, j] = new Tile(tileImgs[Convert.ToInt32(data[j])], Convert.ToInt32(data[j]), Tile.TILE_LENGTH * j, Tile.TILE_LENGTH * i);
+                        //split data 
+                        if (data[j][0].Equals('0'))
+                        {
+                            doesCollide = false;
+                        }
+                        else if (data[j][1].Equals('1'))
+                        {
+                            doesCollide = true;
+                        }
+
+                        data[j].Substring(1);
+
+                        tiles[i, j] = new Tile(tileImgs[Convert.ToInt32(data[j])], Convert.ToInt32(data[j]), Tile.TILE_LENGTH * j, Tile.TILE_LENGTH * i, doesCollide);
                     }
                 }
             }

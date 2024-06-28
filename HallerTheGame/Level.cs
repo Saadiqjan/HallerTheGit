@@ -73,6 +73,9 @@ namespace HallerTheGame
             line = inFile.ReadLine();
             data = line.Split(',');
 
+            //Store does collide
+            bool doesCollide = false;
+
             //Store tileset
             tiles = new Tile[Convert.ToInt32(data[0]), Convert.ToInt32(data[1])];
 
@@ -92,7 +95,19 @@ namespace HallerTheGame
                     //Add new tile for every coloumn in row
                     for (int j = 0; j < tiles.GetLongLength(1); j++)
                     {
-                        tiles[i, j] = new Tile(tileImgs[Convert.ToInt32(data[j])], Convert.ToInt32(data[j]), Tile.TILE_LENGTH * j, Tile.TILE_LENGTH * i);
+                        //split data 
+                        if (data[j][0].Equals('0'))
+                        {
+                            doesCollide = false;
+                        }
+                        else if (data[j][1].Equals('1'))
+                        {
+                            doesCollide = true;
+                        }
+
+                        data[j].Substring(1);
+
+                        tiles[i, j] = new Tile(tileImgs[Convert.ToInt32(data[j])], Convert.ToInt32(data[j]), Tile.TILE_LENGTH * j, Tile.TILE_LENGTH * i, doesCollide);
                     }
                 }
             }

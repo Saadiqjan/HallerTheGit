@@ -24,7 +24,9 @@ namespace HallerTheGame
         public const int TILE_LENGTH = 32;
 
         //Tile ids as constant ints
-
+        public const int AIR = 0;
+        public const int GRASS = 1;
+        public const int DIRT = 2;
 
         //Store tile id
         private int tileID;
@@ -34,6 +36,9 @@ namespace HallerTheGame
         private Vector2 tilePos;
         private Rectangle tileRec;
 
+        //Check if tile collides
+        private bool doesCollide;
+
         /// <summary>
         /// Create tile
         /// </summary>
@@ -41,11 +46,12 @@ namespace HallerTheGame
         /// <param name="tileID">tile id</param>
         /// <param name="xPos">x position</param>
         /// <param name="yPos">y position</param>
-        public Tile(Texture2D tileImg, int tileID, int xPos, int yPos)
+        public Tile(Texture2D tileImg, int tileID, int xPos, int yPos, bool doesCollide)
         {
-            //Stoer parameters
+            //Store parameters
             this.tileImg = tileImg;
             this.tileID = tileID;
+            this.doesCollide = doesCollide;
 
             //Create rectangle and position of tile
             tilePos = new Vector2(xPos, yPos);
