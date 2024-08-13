@@ -30,6 +30,8 @@ namespace HallerTheGame
         private const int CONTINUE_BTN = 1;
         private const int EXIT_BTN = 2;
 
+        private const int NUM_TILES = 3;
+
         public static Random rng = new Random();
 
         private Cam2D cam;
@@ -65,7 +67,11 @@ namespace HallerTheGame
         private Vector2[,] saveBtnPos = new Vector2[3, 3];
         private Button[,] saveBtns = new Button[3, 3];
 
+        private Texture2D[] tileImgs = new Texture2D[NUM_TILES];
+
         private Level tutorialLevel;
+
+        private Camp playerCamp;
 
         //An enum is a variable in c# that essentially replaces states
         //Essentially you make your own variable and set it
@@ -95,7 +101,7 @@ namespace HallerTheGame
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
 
-            graphics.PreferredBackBufferWidth = 1200;
+            graphics.PreferredBackBufferWidth = 1152;
             graphics.PreferredBackBufferHeight = 672;
 
             //Apply changes
@@ -170,7 +176,8 @@ namespace HallerTheGame
             menuBtns[EXIT_BTN] = new Button(btnImg, buttonFont, "Exit", Color.White, Color.LightGray, menuBtnPos[EXIT_BTN], 1.5f, buttonClick);
 
             menuBG = new Parallax(bgLayers, 0, 0.45f);
-            // TODO: use this.Content to load your game content here
+
+            playerCamp = new Camp(tileImgs, new Rectangle(0, 0, screenWidth, screenHeight), "CampFile.txt", null);
         }
 
         /// <summary>

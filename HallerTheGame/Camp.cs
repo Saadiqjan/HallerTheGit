@@ -29,9 +29,33 @@ namespace HallerTheGame
         private Texture2D[] tileImgs;
         private Tile[,] tiles;
 
-        public Camp(Rectangle levelBounds, string mapFile, Song bgm)
+        private Player player;
+
+        public Camp(Texture2D[] tileImgs, Rectangle levelBounds, string mapFile, Song bgm)
         {
+            this.tileImgs = tileImgs;
             LoadMap(mapFile);
+        }
+
+        public void Update(GameTime gameTime)
+        {
+
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
+
+            //Draw tiles
+            for (int i = 0; i < tiles.GetLongLength(0); i++)
+            {
+                for (int j = 0; j < tiles.GetLongLength(1); j++)
+                {
+                    tiles[i, j].Draw(spriteBatch);
+                }
+            }
+
+            spriteBatch.End();      
         }
 
         private void LoadMap(string mapFile)

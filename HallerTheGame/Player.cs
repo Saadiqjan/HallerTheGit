@@ -20,7 +20,7 @@ namespace HallerTheGame
 {
     class Player
     {
-        public enum playerState { idle, walk, jump, sneak, roll, guard, attack }
+        public enum playerState { idle, walk, jump, sprint, sneak, roll, guard, attack }
 
         private playerState state = playerState.idle;
 
@@ -37,6 +37,10 @@ namespace HallerTheGame
 
         private Timer[] abilityCooldowns;
         private bool[] abilityUnlocked;
+
+        private bool isJumping = false;
+
+        private Timer rollTimer;
 
         public Player()
         {
@@ -63,14 +67,69 @@ namespace HallerTheGame
             this.health = health;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, KeyboardState kb, KeyboardState prevKb, MouseState mouse, MouseState prevMouse)
         {
+            for (int i = 0; i < anims.Length; i++)
+            {
+                anims[i].Update(gameTime);
+            }
 
+            /////////////
+            /// INPUT ///
+            /////////////
+            
+            //Check left right movement
+            if (kb.IsKeyDown(Keys.D))
+            {
+                direction = RIGHT;
+            }
+            else if (kb.IsKeyDown(Keys.A))
+            {
+                direction = LEFT;
+            }
+
+            if ((kb.IsKeyDown(Keys.A) || kb.IsKeyDown(Keys.D)) && !isJumping)
+            {
+                //Check sprint or crouch
+                if (kb.IsKeyDown(Keys.LeftShift))
+                {
+                    state = playerState.sprint;
+                }
+                else if (kb.IsKeyDown(Keys.LeftControl))
+                {
+                    state = playerState.sneak;
+                }
+                else
+                {
+                    state = playerState.walk;
+                }
+            }
+            else if (kb.IsKeyDown(Keys.Space) && !prevKb.IsKeyDown(Keys.Space))
+            {
+                state = playerState.jump;
+            }
+            else if (mouse.LeftButton == ButtonState.Pressed && prevMouse.LeftButton != ButtonState.Pressed)
+            {
+                state = playerState.attack;
+            }
+            else if (kb.IsKeyDown(Keys.S))
+            {
+                state = playerState.roll;
+            }
+            else
+            {
+                if (!isJumping)
+                {
+                    state = playerState.idle;
+                }
+            }
+
+            //Move player
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            anims[(int)state].Draw(spriteBatch, Color.White);
         }
     }
 }
