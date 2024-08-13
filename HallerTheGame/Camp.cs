@@ -67,17 +67,17 @@ namespace HallerTheGame
             //Store does collide
             bool doesCollide = false;
 
-            line = inFile.ReadLine();
-            data = line.Split(',');
-
-            //Store tileset
-            tiles = new Tile[Convert.ToInt32(data[0]), Convert.ToInt32(data[1])];
-
             //Try to read in tileset file
             try
             {
                 //Open file
                 inFile = File.OpenText(mapFile);
+
+                line = inFile.ReadLine();
+                data = line.Split(',');
+
+                //Store tileset
+                tiles = new Tile[Convert.ToInt32(data[0]), Convert.ToInt32(data[1])];
 
                 //Loop through each row
                 for (int i = 0; i < tiles.GetLongLength(0); i++)
