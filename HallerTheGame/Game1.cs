@@ -1,8 +1,8 @@
-﻿//Author: Saadiq Shahsamand
+﻿//Author: Saadiq Shahsamand & Noah Segal
 //File Name: Game1.cs
 //Project Name: HallerTheGame
 //Creation Date: Mar. 18 2024
-//Modified Date: Apr. 20 2024
+//Modified Date: Aug. 12 2024
 //Description: Funny haha game
 using GameUtility;
 using Microsoft.Xna.Framework;
@@ -25,16 +25,6 @@ namespace HallerTheGame
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-
-        public const int MAIN_MENU = 0;
-        public const int SAVE_MENU = 1;
-        public const int TUTORIAL = 2;
-        public const int CAMP = 3;
-        public const int LEVEL_SELECT = 4;
-        public const int LEVEL = 5;
-        public const int PAUSE = 6;
-        public const int LEVEL_COMPLETE = 7;
-        public static int gameState = MAIN_MENU;
 
         private const int NEW_GAME_BTN = 0;
         private const int CONTINUE_BTN = 1;
@@ -72,10 +62,21 @@ namespace HallerTheGame
         private Vector2[] menuBtnPos = new Vector2[3];
         private Button[] menuBtns = new Button[3];
 
-        private Vector2[,] saveBtnPos = new Vector2[3,3];
+        private Vector2[,] saveBtnPos = new Vector2[3, 3];
         private Button[,] saveBtns = new Button[3, 3];
 
         private Level tutorialLevel;
+
+        //An enum is a variable in c# that essentially replaces states
+        //Essentially you make your own variable and set it
+        public enum gameState
+        {
+            menu, saveMenu, tutorial, camp, levelSelect, level,
+            pause, levelComplete
+        }
+
+        //Define the state that the game is currently in
+        private gameState state = gameState.menu;
 
         public Game1()
         {
@@ -152,7 +153,7 @@ namespace HallerTheGame
             int xOff = screenWidth / (saveBtns.GetLength(0) + 1) - saveBtnImg.Width;
             int yOff = screenHeight / (saveBtns.GetLength(1) + 1) - saveBtnImg.Height;
 
-            int saveNum = 0; 
+            int saveNum = 0;
 
             for (int i = 0; i < saveBtns.GetLength(0); i++)
             {
@@ -192,25 +193,25 @@ namespace HallerTheGame
             mouse = Mouse.GetState();
 
             // TODO: Add your update logic here
-            switch (gameState)
+            switch (state)
             {
-                case MAIN_MENU:
+                case gameState.menu:
                     MainMenuUpdate();
                     break;
-                case SAVE_MENU:
+                case gameState.saveMenu:
                     SaveMenuUpdate();
                     break;
-                case TUTORIAL:
+                case gameState.tutorial:
                     break;
-                case CAMP:
+                case gameState.camp:
                     break;
-                case LEVEL_SELECT:
+                case gameState.levelSelect:
                     break;
-                case LEVEL:
+                case gameState.level:
                     break;
-                case PAUSE:
+                case gameState.pause:
                     break;
-                case LEVEL_COMPLETE:
+                case gameState.levelComplete:
                     break;
             }
 
@@ -227,25 +228,25 @@ namespace HallerTheGame
 
             // TODO: Add your drawing code here
 
-            switch (gameState)
+            switch (state)
             {
-                case MAIN_MENU:
+                case gameState.menu:
                     MainMenuDraw();
                     break;
-                case SAVE_MENU:
+                case gameState.saveMenu:
                     SaveMenuDraw();
                     break;
-                case TUTORIAL:
+                case gameState.tutorial:
                     break;
-                case CAMP:
+                case gameState.camp:
                     break;
-                case LEVEL_SELECT:
+                case gameState.levelSelect:
                     break;
-                case LEVEL:
+                case gameState.level:
                     break;
-                case PAUSE:
+                case gameState.pause:
                     break;
-                case LEVEL_COMPLETE:
+                case gameState.levelComplete:
                     break;
             }
 
@@ -258,11 +259,11 @@ namespace HallerTheGame
 
             if (menuBtns[NEW_GAME_BTN].IsClicked(mouse, prevMouse))
             {
-                gameState = SAVE_MENU;
+                state = gameState.saveMenu;
             }
             else if (menuBtns[CONTINUE_BTN].IsClicked(mouse, prevMouse))
             {
-                gameState = SAVE_MENU;
+                state = gameState.saveMenu;
             }
             else if (menuBtns[EXIT_BTN].IsClicked(mouse, prevMouse))
             {
@@ -280,7 +281,7 @@ namespace HallerTheGame
             {
                 menuBtns[i].Draw(spriteBatch, mouse.Position);
             }
-            
+
             spriteBatch.End();
         }
 
@@ -296,11 +297,11 @@ namespace HallerTheGame
                     {
                         if (tutorialDone)
                         {
-                            gameState = CAMP;
+                            state = gameState.camp;
                         }
                         else
                         {
-                            gameState = TUTORIAL;
+                            state = gameState.tutorial;
                         }
                     }
                 }
