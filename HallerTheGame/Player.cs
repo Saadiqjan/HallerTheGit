@@ -1,8 +1,8 @@
-﻿//Author: Saadiq Shahsamand
+﻿//Author: Saadiq Shahsamand & Noah Segal
 //File Name: Level.cs
 //Project Name: HallerTheGame
 //Creation Date: Apr. 19 2024
-//Modified Date: Jun. 25 2024
+//Modified Date: Aug. 12 2024
 //Description: level
 using GameUtility;
 using Microsoft.Xna.Framework;
@@ -20,15 +20,9 @@ namespace HallerTheGame
 {
     class Player
     {
-        public const int IDLE = 0;
-        public const int WALK = 1;
-        public const int JUMP = 2;
-        public const int SNEAK = 3;
-        public const int ROLL = 4;
-        public const int GUARD = 5;
-        public const int ATTACK = 6;
+        public enum playerState { idle, walk, jump, sneak, roll, guard, attack }
 
-        private int state = IDLE;
+        private playerState state = playerState.idle;
 
         public const int RIGHT = 1;
         public const int LEFT = -1;
@@ -51,10 +45,10 @@ namespace HallerTheGame
 
         public int GetState()
         {
-            return state;
+            return (int)state;
         }
 
-        public void SetState(int state)
+        public void SetState(playerState state)
         {
             this.state = state;
         }
