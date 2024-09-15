@@ -110,6 +110,30 @@
 /processorParam:TextureFormat=Color
 /build:Images/Backgrounds/Starry_night_Layer_8.png
 
+#begin Images/Sprites/DirtBlock.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/Sprites/DirtBlock.png
+
+#begin Images/Sprites/GrassBlock.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Images/Sprites/GrassBlock.png
+
 #begin Images/Sprites/HallerTitle.png
 /importer:TextureImporter
 /processor:TextureProcessor

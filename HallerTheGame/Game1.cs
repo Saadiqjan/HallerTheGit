@@ -46,7 +46,7 @@ namespace HallerTheGame
         private KeyboardState kb;
         private KeyboardState prevKb;
 
-        private bool tutorialDone = false;
+        private bool tutorialDone = true;
 
         private SpriteFont buttonFont;
 
@@ -149,6 +149,10 @@ namespace HallerTheGame
             btnImg = Content.Load<Texture2D>("Images/Sprites/MenuButton");
             saveBtnImg = Content.Load<Texture2D>("Images/Sprites/SaveButton");
 
+            tileImgs[Tile.AIR] = null;
+            tileImgs[Tile.GRASS] = Content.Load<Texture2D>("Images/Sprites/GrassBlock");
+            tileImgs[Tile.DIRT] = Content.Load<Texture2D>("Images/Sprites/DirtBlock");
+
             titleRec = new Rectangle(screenWidth / 2 - titleImg.Width / 2, 50, titleImg.Width, titleImg.Height);
 
             for (int i = 0; i < menuBtns.Length; i++)
@@ -211,6 +215,7 @@ namespace HallerTheGame
                 case gameState.tutorial:
                     break;
                 case gameState.camp:
+                    CampUpdate();
                     break;
                 case gameState.levelSelect:
                     break;
@@ -246,6 +251,7 @@ namespace HallerTheGame
                 case gameState.tutorial:
                     break;
                 case gameState.camp:
+                    CampDraw();
                     break;
                 case gameState.levelSelect:
                     break;
@@ -329,6 +335,16 @@ namespace HallerTheGame
             }
 
             spriteBatch.End();
+        }
+
+        private void CampUpdate()
+        {
+
+        }
+
+        private void CampDraw()
+        {
+            playerCamp.Draw(spriteBatch);
         }
     }
 }

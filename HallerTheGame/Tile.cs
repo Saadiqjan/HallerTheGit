@@ -60,6 +60,8 @@ namespace HallerTheGame
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (tileImg == null) return;
+
             spriteBatch.Draw(tileImg, tileRec, Color.White);
         }
     }

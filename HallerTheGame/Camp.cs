@@ -51,7 +51,10 @@ namespace HallerTheGame
             {
                 for (int j = 0; j < tiles.GetLongLength(1); j++)
                 {
-                    tiles[i, j].Draw(spriteBatch);
+                    if (tiles[i, j] != null)
+                    {
+                        tiles[i, j].Draw(spriteBatch);
+                    }
                 }
             }
 
@@ -90,16 +93,18 @@ namespace HallerTheGame
                     for (int j = 0; j < tiles.GetLongLength(1); j++)
                     {
                         //split data 
+                        /*
                         if (data[j][0].Equals('0'))
                         {
                             doesCollide = false;
                         }
-                        else if (data[j][1].Equals('1'))
+                        else if (data[j][0].Equals('1'))
                         {
                             doesCollide = true;
                         }
+                        */
 
-                        data[j].Substring(1);
+                        data[j] = data[j].Substring(1); 
 
                         tiles[i, j] = new Tile(tileImgs[Convert.ToInt32(data[j])], Convert.ToInt32(data[j]), Tile.TILE_LENGTH * j, Tile.TILE_LENGTH * i, doesCollide);
                     }

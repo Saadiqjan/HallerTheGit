@@ -100,7 +100,7 @@ namespace HallerTheGame
                         {
                             doesCollide = false;
                         }
-                        else if (data[j][1].Equals('1'))
+                        else if (data[j][0].Equals('1'))
                         {
                             doesCollide = true;
                         }
